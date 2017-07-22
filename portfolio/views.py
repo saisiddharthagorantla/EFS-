@@ -103,12 +103,12 @@ def investment_list(request):
 
 @login_required
 def investment_edit(request, pk):
-   investment = get_object_or_404(Stock, pk=pk)
+   investment = get_object_or_404(Investment, pk=pk)
    if request.method == "POST":
        form = InvestmentForm(request.POST, instance=investment)
        if form.is_valid():
            investment = form.save()
-           # stock.customer = stock.id
+           # investment.customer = investment.id
            investment.updated_date = timezone.now()
            investment.save()
            investments = Investment.objects.filter(acquired_date__lte=timezone.now())
